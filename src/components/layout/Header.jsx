@@ -10,7 +10,7 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
 
-  const isLandingPage = location.pathname === '/';
+  const isLandingPage = location.pathname === '/landing';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +21,7 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    { name: '홈', path: '/home', icon: Home },
+    { name: '홈', path: '/', icon: Home },
     { name: 'AI 진단', path: '/diagnosis', icon: Stethoscope },
     { name: '반려견', path: '/pets', icon: Dog },
     { name: '질환 정보', path: '/diseases', icon: BookOpen },
@@ -233,7 +233,7 @@ export default function Header() {
 
       {/* 모바일 하단 내비게이션 */}
       {!isLandingPage && (
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-100 pb-safe">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-100 pb-safe py-1">
           <div className="flex items-center justify-around px-1 py-2">
             {navItems.map((item) => {
               const Icon = item.icon;

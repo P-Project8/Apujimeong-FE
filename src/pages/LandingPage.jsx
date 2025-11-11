@@ -84,7 +84,7 @@ export default function LandingPage() {
               <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
-              onClick={() => navigate('/home')}
+              onClick={() => navigate('/')}
               className="px-8 md:px-10 py-4 md:py-5 bg-white hover:bg-amber-50 text-amber-900 rounded-full font-bold text-base md:text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all border-2 border-amber-200 z-10"
             >
               서비스 둘러보기
