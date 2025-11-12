@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import { Mars, Plus, Venus, X } from 'lucide-react';
+import { Mars, Plus, Venus } from 'lucide-react';
 import { DOGS } from '../data/dogs';
+import RegisterPet from '../components/features/pets/RegisterPet';
 
 // 폴라로이드 카드 컴포넌트
 const PolaroidDogCard = ({ dog, index, onDetailView }) => {
@@ -123,11 +124,27 @@ const PolaroidDogCard = ({ dog, index, onDetailView }) => {
 };
 
 export default function PetsPage() {
-  const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [showRegisterPage, setShowRegisterPage] = useState(false);
 
   const handleDetailView = (dogId) => {
     console.log(`강아지 상세보기: ${dogId}`);
   };
+
+  const handleRegister = (formData) => {
+    console.log('등록할 데이터:', formData);
+    // 여기에 실제 등록 로직 추가
+    setShowRegisterPage(false);
+  };
+
+  // 등록 페이지가 열려있으면 등록 페이지만 표시
+  if (showRegisterPage) {
+    return (
+      <RegisterPet
+        onBack={() => setShowRegisterPage(false)}
+        onRegister={handleRegister}
+      />
+    );
+  }
 
   return (
     <div
@@ -136,29 +153,15 @@ export default function PetsPage() {
         background: 'linear-gradient(to bottom, #fef3c7, #fed7aa, #fef3c7)',
       }}
     >
-      {/* 배경 패턴 (빈티지 느낌) */}
-      <div
-        className="absolute inset-0 opacity-5 pointer-events-none"
-        style={{
-          backgroundImage: `repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 35px,
-            rgba(139, 69, 19, 0.1) 35px,
-            rgba(139, 69, 19, 0.1) 70px
-          )`,
-        }}
-      />
-
-      {/* 빈티지 스타일 추가 버튼 */}
+      {/* 추가 버튼 */}
       <button
-        onClick={() => setShowRegisterModal(true)}
-        className="fixed bottom-24 right-4 bg-white border border-amber-900 text-amber-900 rounded-3xl font-bold shadow-lg transform hover:scale-105 transition-all z-50 p-3"
+        onClick={() => setShowRegisterPage(true)}
+        className="fixed bottom-26 right-5 bg-amber-100 text-amber-900 rounded-3xl font-bold shadow-lg transform hover:scale-105 transition-all z-50 p-3"
         style={{
           boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
         }}
       >
-        <span className="text-sm">등록하기</span>
+        <Plus className="w-6 h-6" />
       </button>
 
       {/* Dog List - 폴라로이드 스타일 */}
@@ -191,7 +194,7 @@ export default function PetsPage() {
               우리 강아지를 등록하고 건강을 관리해보세요
             </p>
             <button
-              onClick={() => setShowRegisterModal(true)}
+              onClick={() => setShowRegisterPage(true)}
               className="px-8 py-3 bg-white text-amber-900 rounded-sm font-bold shadow-md transform hover:scale-105 transition-all inline-flex items-center gap-2"
               style={{
                 border: '3px solid #78350f',
@@ -202,116 +205,6 @@ export default function PetsPage() {
           </div>
         )}
       </div>
-
-      {/* Register Modal - 빈티지 스타일 */}
-      {showRegisterModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full relative p-8">
-            {/* 닫기 버튼 */}
-            <button
-              onClick={() => setShowRegisterModal(false)}
-              className="absolute top-3 right-3 text-amber-900 hover:bg-amber-100 rounded-full p-1 transition-all"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <h2 className="text-2xl font-bold text-amber-950 mb-6 text-center">
-              반려견 등록
-            </h2>
-
-            {/* 등록 폼 */}
-            <div className="space-y-4">
-              <div>
-                <label className="block text-amber-900 mb-2 text-sm font-medium">
-                  이름
-                </label>
-                <input
-                  type="text"
-                  placeholder="우리 강아지 이름"
-                  className="w-full px-4 py-2 border-2 border-amber-800 rounded-2xl focus:outline-none focus:border-amber-900 text-sm text-black"
-                />
-              </div>
-
-              <div>
-                <label className="block text-amber-900 mb-2 text-sm font-medium">
-                  품종
-                </label>
-                <input
-                  type="text"
-                  placeholder="예: 푸들, 말티즈"
-                  className="w-full px-4 py-2 border-2 border-amber-800 rounded-2xl focus:outline-none focus:border-amber-900 text-sm text-black"
-                />
-              </div>
-
-              <div>
-                <label className="block text-amber-900 mb-2 text-sm font-medium">
-                  생일
-                </label>
-                <input
-                  type="date"
-                  className="w-full px-4 py-2 border-2 border-amber-800 rounded-2xl focus:outline-none focus:border-amber-900 text-sm text-black"
-                />
-              </div>
-
-              <div>
-                <label className="block text-amber-900 mb-2 text-sm font-medium">
-                  성별
-                </label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="남"
-                      className="w-4 h-4"
-                    />
-                    <span className="text-sm text-amber-900">남</span>
-                  </label>
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="여"
-                      className="w-4 h-4 bg-white"
-                    />
-                    <span className="text-sm text-amber-900">여</span>
-                  </label>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-amber-900 mb-2 text-sm font-medium">
-                  사진
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="w-full px-4 py-2 border-2 border-amber-800 rounded-sm focus:outline-none focus:border-amber-900 text-sm"
-                />
-              </div>
-            </div>
-
-            {/* 버튼들 */}
-            <div className="flex gap-3 mt-6">
-              <button
-                onClick={() => setShowRegisterModal(false)}
-                className="flex-1 px-6 py-2 bg-gray-200 text-amber-900 border-2 border-gray-400 rounded-4xl font-semibold shadow-md transition-all hover:bg-gray-300 text-sm"
-              >
-                취소
-              </button>
-              <button
-                onClick={() => {
-                  // 등록 로직
-                  setShowRegisterModal(false);
-                }}
-                className="flex-1 px-6 py-2 bg-amber-800 text-white border-2 border-amber-900 rounded-4xl font-semibold shadow-md transition-all hover:bg-amber-900 text-sm"
-              >
-                등록하기
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

@@ -132,22 +132,12 @@ export default function DiagnosisPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 pt-24 md:pt-32 pb-24 md:pb-32 px-8 md:px-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 pt-24 md:pt-32 pb-24 md:pb-32 px-6 md:px-4">
       <div className="max-w-7xl mx-auto">
-        {/* 헤더 */}
-        <div className="text-center mb-4 md:mb-8">
-          <div className="inline-flex items-center gap-2 bg-blue-100 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-3 md:mb-4">
-            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
-            <span className="text-xs md:text-sm text-blue-600 font-semibold">
-              AI 기반 건강 분석
-            </span>
-          </div>
-        </div>
-
         {/* 분석 결과가 없을 때 */}
         {!analysisResult && (
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
-            {/* 왼쪽: 업로드 영역 */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-6 mb-6 md:mb-8">
+            {/* 업로드 영역 */}
             <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg border border-gray-200 h-full">
               <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-4 md:mb-6">
                 1. 사진 업로드
@@ -238,9 +228,8 @@ export default function DiagnosisPage() {
               </div>
             </div>
 
-            {/* 오른쪽: 반려견 선택 & 최근 기록 */}
-            <div className="space-y-4 md:space-y-6">
-              {/* 반려견 선택 */}
+            {/* 반려견 선택*/}
+            <div className="space-y-8 md:space-y-6">
               <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 shadow-lg border border-gray-200">
                 <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-gray-900 mb-4 md:mb-6">
                   2. 반려견 선택
@@ -250,28 +239,23 @@ export default function DiagnosisPage() {
                     <button
                       key={dog.id}
                       onClick={() => setSelectedDog(dog.id)}
-                      className={`w-full p-3 md:p-5 rounded-lg md:rounded-xl border-2 transition-all ${
+                      className={`w-full p-3 px-6 md:p-5 rounded-lg md:rounded-xl border-2 transition-all ${
                         selectedDog === dog.id
                           ? 'border-blue-500 bg-blue-50 shadow-md'
                           : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
                       }`}
                     >
-                      <div className="flex items-center gap-3 md:gap-4">
-                        <div className="text-3xl md:text-4xl lg:text-5xl">
-                          {dog.image}
-                        </div>
-                        <div className="flex-1 text-left">
-                          <div className="font-bold text-gray-900 text-base md:text-lg">
-                            {dog.name}
-                          </div>
-                          <div className="text-sm md:text-base text-gray-600">
-                            {dog.breed}
-                          </div>
-                        </div>
-                        {selectedDog === dog.id && (
-                          <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
-                        )}
+                      <div className="flex items-center justify-between md:gap-4">
+                        <h1 className="font-bold text-gray-900 text-base md:text-lg">
+                          {dog.name}
+                        </h1>
+                        <p className="text-sm md:text-base text-gray-400">
+                          {dog.breed}
+                        </p>
                       </div>
+                      {selectedDog === dog.id && (
+                        <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+                      )}
                     </button>
                   ))}
                 </div>

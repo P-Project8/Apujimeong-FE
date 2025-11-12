@@ -30,7 +30,7 @@ export default function Header() {
 
   const LoginModal = () => (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-150 p-4 backdrop-blur-sm">
-      <div className="bg-white rounded-2xl md:rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl relative">
+      <div className="bg-white rounded-2xl md:rounded-3xl p-10 md:p-8 max-w-md w-full shadow-2xl relative">
         {/* X 버튼 */}
         <button
           onClick={() => setShowLoginModal(false)}
@@ -54,7 +54,7 @@ export default function Header() {
         <img
           src="/logo.png"
           alt="logo"
-          className="m-auto w-32 md:w-40 h-auto mb-8 md:mb-12 mt-2 md:mt-4"
+          className="m-auto w-32 md:w-40 h-auto mb-8 md:mb-12 mt-4 md:mt-4"
         />
         <p className="text-slate-400 text-xs md:text-sm mb-2 text-center">
           간편하게 SNS 로그인
