@@ -12,6 +12,7 @@ import {
   Info,
   Calendar,
 } from 'lucide-react';
+import { DOGS } from '../data/dogs';
 
 export default function DiagnosisPage() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,13 +22,6 @@ export default function DiagnosisPage() {
   const [selectedDog, setSelectedDog] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const fileInputRef = useRef(null);
-
-  // 반려견 목록 (메인 페이지와 동일)
-  const dogs = [
-    { id: 1, name: '뭉치', breed: '골든 리트리버', image: '🐕' },
-    { id: 2, name: '꼬미', breed: '포메라니안', image: '🐶' },
-    { id: 3, name: '코코', breed: '말티즈', image: '🦮' },
-  ];
 
   // 분석 카테고리
   const categories = [
@@ -77,7 +71,7 @@ export default function DiagnosisPage() {
     setTimeout(() => {
       setIsAnalyzing(false);
       setAnalysisResult({
-        dogName: dogs.find((d) => d.id === selectedDog).name,
+        dogName: DOGS.find((d) => d.id === selectedDog).name,
         category: categoryName,
         analysisDate: new Date().toLocaleDateString('ko-KR'),
         overallHealth: 85,
@@ -138,22 +132,16 @@ export default function DiagnosisPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 pt-20 md:pt-32 pb-24 md:pb-32 px-3 md:px-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 pt-24 md:pt-32 pb-24 md:pb-32 px-8 md:px-4">
       <div className="max-w-7xl mx-auto">
         {/* 헤더 */}
-        <div className="text-center mb-6 md:mb-8">
+        <div className="text-center mb-4 md:mb-8">
           <div className="inline-flex items-center gap-2 bg-blue-100 px-3 md:px-4 py-1.5 md:py-2 rounded-full mb-3 md:mb-4">
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
             <span className="text-xs md:text-sm text-blue-600 font-semibold">
               AI 기반 건강 분석
             </span>
           </div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 md:mb-3">
-            반려견 AI 진단
-          </h1>
-          <p className="text-sm md:text-base lg:text-lg text-gray-600">
-            사진 한 장으로 반려견의 건강 상태를 빠르게 확인해보세요
-          </p>
         </div>
 
         {/* 분석 결과가 없을 때 */}
@@ -258,11 +246,11 @@ export default function DiagnosisPage() {
                   2. 반려견 선택
                 </h2>
                 <div className="space-y-2 md:space-y-3">
-                  {dogs.map((dog) => (
+                  {DOGS.map((dog) => (
                     <button
                       key={dog.id}
                       onClick={() => setSelectedDog(dog.id)}
-                      className={`w-full p-4 md:p-5 rounded-lg md:rounded-xl border-2 transition-all ${
+                      className={`w-full p-3 md:p-5 rounded-lg md:rounded-xl border-2 transition-all ${
                         selectedDog === dog.id
                           ? 'border-blue-500 bg-blue-50 shadow-md'
                           : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
@@ -299,7 +287,7 @@ export default function DiagnosisPage() {
                     !selectedImage ||
                     isAnalyzing
                   }
-                  className="w-full py-4 md:py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg md:rounded-xl font-bold text-base md:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-3 md:py-5 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-lg md:rounded-xl font-bold text-base md:text-lg hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isAnalyzing ? (
                     <>
@@ -321,7 +309,7 @@ export default function DiagnosisPage() {
                       <span>반려견:</span>
                       <span className="font-semibold text-gray-900">
                         {selectedDog
-                          ? dogs.find((d) => d.id === selectedDog)?.name
+                          ? DOGS.find((d) => d.id === selectedDog)?.name
                           : '미선택'}
                       </span>
                     </div>
